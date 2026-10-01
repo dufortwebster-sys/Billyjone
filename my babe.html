@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pour Astrid ❤️</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d0d1a;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Message central fixe */
+    .message-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 25px 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 30px rgba(255, 51, 102, 0.4);
+      pointer-events: none;
+    }
+
+    .message-center h1 {
+      color: #fff;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #ff3366;
+    }
+
+    .message-center p {
+      color: #ffb3c1;
+      font-size: 1.1rem;
+      margin-top: 5px;
+    }
+
+    /* Container des emojis animés */
+    .emoji-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .emoji {
+      position: absolute;
+      top: -50px;
+      user-select: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="message-center">
+    <h1>Moi aussi je t'aime ma belle Astrid ❤️</h1>
+    <p>Une pluie d'amour infinie pour toi...</p>
+  </div>
+
+  <div class="emoji-container" id="emojiContainer"></div>
+
+  <script>
+    // Liste des emojis similaires à l'image
+    const emojis = ['❤️', '💖', '💗', '💓', '💞', '💕', '💌', '❣️', '🍒', '✨', '❤️‍🔥', '🌸', '💘', '🩸', '💔', '🩹', '🫀', '🥰'];
+
+    const container = document.getElementById('emojiContainer');
+
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji');
+      
+      // Choix aléatoire de l'emoji
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+      // Position horizontale aléatoire (0% à 100%)
+      emoji.style.left = Math.random() * 100 + 'vw';
+
+      // Taille aléatoire (entre 20px et 50px)
+      const size = Math.random() * 30 + 20;
+      emoji.style.fontSize = size + 'px';
+
+      // Durée de chute aléatoire (entre 3s et 8s)
+      const duration = Math.random() * 5 + 3;
+      emoji.style.animationDuration = duration + 's';
+
+      // Flou de profondeur optionnel pour les plus petits emojis
+      if (size < 30) {
+        emoji.style.filter = 'blur(1px)';
+        emoji.style.opacity = '0.7';
+      }
+
+      container.appendChild(emoji);
+
+      // Suppression de l'élément à la fin de son animation
+      setTimeout(() => {
+        emoji.remove();
+      }, duration * 1000);
+    }
+
+    // Génère un emoji toutes les 80 millisecondes en continu
+    setInterval(createEmoji, 80);
+  </script>
+</body>
+</html>
+
